@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import MyFirstComponent from './test/my.component'
-
+import EricComponent from './test/second.component'
 
 //inline
 // const MyFirstComponent = () => <div>my first component update bla bla</div>
@@ -17,7 +17,7 @@ function App() {
       <div>
 
         <MyFirstComponent />
-
+        <EricComponent />
 
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
