@@ -2,15 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import MyFirstComponent from './test/my.component'
 
-const MyFirstComponent = () => {
-
-  return (
-    <div>
-      my first component
-    </div>
-  )
-}
 
 //inline
 // const MyFirstComponent = () => <div>my first component update bla bla</div>
