@@ -9,6 +9,7 @@ function App() {
     address: "ha noi"
   }
 
+  const todos = ["todo 1", "todo 2", "todo 3", "todo 4", "todo 5", "todo 6"]
   // {key: value}
   return (
     <div>
@@ -20,12 +21,19 @@ function App() {
         age={age}
         hoidanit={info}
       />
-      <InputTodo
-        name={name}
-        age={age}
-        hoidanit={info}
-        abc="def"
-      />
+
+      <ul>
+        {todos.map((item, index) => {
+          return (
+            <li key={index} > {item}</li>
+          )
+        })}
+        {/* <li>Todo 1</li>
+        <li>Todo 2</li>
+        <li>Todo 3</li>
+        <li>Todo 4</li>
+        <li>Todo 5</li> */}
+      </ul>
     </div>
   )
 }

@@ -12,30 +12,25 @@ interface IProps {
 }
 
 const InputTodo = (props: IProps) => {
-    // const InputTodo = (
-    //     { age, name }: {
-    //         name: string;
-    //         age: number;
-    //         hoidanit: {
-    //             gender: string;
-    //             address: string
-    //         }
-    //         abc?: string; //optional 
-    //     }
-    // ) => {
-
     const { age, name } = props; // object destructuring
-    //props: object
-    // console.log(">>> check props: ", props)
-    //jsx
+
+    const handleClick = () => {
+        alert("click me")
+    }
+
     return (
         <div>
             <div>age = {age}</div>
             <div>name = {name}</div>
             <div>Add new todo</div>
-            <input type="text" />
+            <input
+                type="text"
+                onChange={(event) => {
+                    console.log(event.target.value)
+                }}
+            />
             &nbsp; &nbsp;
-            <button>Save</button>
+            <button onClick={() => handleClick()}>Save</button>
         </div>
     )
 }
