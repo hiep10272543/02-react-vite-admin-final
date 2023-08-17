@@ -22,18 +22,14 @@ function App() {
         hoidanit={info}
       />
 
-      <ul>
+      {/* <ul>
         {todos.map((item, index) => {
           return (
             <li key={index} > {item}</li>
           )
         })}
-        {/* <li>Todo 1</li>
-        <li>Todo 2</li>
-        <li>Todo 3</li>
-        <li>Todo 4</li>
-        <li>Todo 5</li> */}
-      </ul>
+
+      </ul> */}
     </div>
   )
 }

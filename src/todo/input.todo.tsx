@@ -1,4 +1,5 @@
-
+import { useState } from 'react';
+// use => hook
 //compile: dịch code: typescript => javascript (check type)
 // run: chạy code
 interface IProps {
@@ -11,26 +12,48 @@ interface IProps {
     abc?: string; //optional
 }
 
+
 const InputTodo = (props: IProps) => {
-    const { age, name } = props; // object destructuring
+
+    const [todo, setTodo] = useState("");
+    const [listTodo, setListTodo] = useState(
+        ["todo 1", "todo 2", "todo 3", "todo 4", "todo 5", "todo 6"]
+    )
 
     const handleClick = () => {
-        alert("click me")
+        if (!todo) {
+            alert("empty todo");
+            return;
+        }
+        // alert("click me")
+        setListTodo([...listTodo, todo]) //spread syntax
+        setTodo("")
     }
 
+    console.log(">>> ")
     return (
-        <div>
-            <div>age = {age}</div>
-            <div>name = {name}</div>
+        <div style={{ border: "1px solid red" }}>
             <div>Add new todo</div>
             <input
+                value={todo}
                 type="text"
                 onChange={(event) => {
-                    console.log(event.target.value)
+                    setTodo(event.target.value)
+                    // console.log(event.target.value)
                 }}
             />
             &nbsp; &nbsp;
             <button onClick={() => handleClick()}>Save</button>
+            <br />
+            <ul>
+                {listTodo.map((item, index) => {
+
+                    return (
+                        <li key={index}>{item}</li>
+
+                    )
+                })}
+            </ul>
         </div>
     )
 }
