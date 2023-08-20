@@ -1,3 +1,4 @@
+import { useState } from "react";
 import InputTodo from "./todo/input.todo"
 
 function App() {
@@ -9,8 +10,10 @@ function App() {
     address: "ha noi"
   }
 
-  const todos = ["todo 1", "todo 2", "todo 3", "todo 4", "todo 5", "todo 6"]
-  // {key: value}
+  const [listTodo, setListTodo] = useState(
+    ["todo 1", "todo 2", "todo 3", "todo 4", "todo 5", "todo 6"]
+  )
+
 
   const handleTest = (name: string) => {
     alert(`handle test with name = ${name}`)
@@ -28,16 +31,20 @@ function App() {
 
         ericFunction={handleTest}
 
+        listTodo={listTodo}
+        setListTodo={setListTodo}
       />
 
-      {/* <ul>
-        {todos.map((item, index) => {
+      <br />
+      <ul>
+        {listTodo.map((item, index) => {
+
           return (
-            <li key={index} > {item}</li>
+            <li key={index}>{item}</li>
+
           )
         })}
-
-      </ul> */}
+      </ul>
     </div>
   )
 }

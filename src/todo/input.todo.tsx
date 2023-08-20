@@ -11,27 +11,25 @@ interface IProps {
     }
     abc?: string; //optional
     ericFunction: (value: string) => void;
+    listTodo: string[];
+    setListTodo: (v: string[]) => void
 }
 
 
 const InputTodo = (props: IProps) => {
 
-    const { ericFunction } = props;
+    const { ericFunction, listTodo, setListTodo } = props;
 
     const [todo, setTodo] = useState("");
-    const [listTodo, setListTodo] = useState(
-        ["todo 1", "todo 2", "todo 3", "todo 4", "todo 5", "todo 6"]
-    )
 
     const handleClick = () => {
-        ericFunction(todo)
-        // if (!todo) {
-        //     alert("empty todo");
-        //     return;
-        // }
-        // // alert("click me")
-        // setListTodo([...listTodo, todo]) //spread syntax
-        // setTodo("")
+        if (!todo) {
+            alert("empty todo");
+            return;
+        }
+        // alert("click me")
+        setListTodo([...listTodo, todo]) //spread syntax
+        setTodo("")
     }
 
     console.log(">>> ")
@@ -48,16 +46,7 @@ const InputTodo = (props: IProps) => {
             />
             &nbsp; &nbsp;
             <button onClick={() => handleClick()}>Save</button>
-            <br />
-            <ul>
-                {listTodo.map((item, index) => {
 
-                    return (
-                        <li key={index}>{item}</li>
-
-                    )
-                })}
-            </ul>
         </div>
     )
 }
