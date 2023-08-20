@@ -3,6 +3,7 @@ import InputTodo from "./todo/input.todo"
 
 function App() {
 
+  const [count, setCount] = useState(10)
   const name = "Hỏi Dân IT";
   const age = 25;
   const info = {
@@ -19,8 +20,11 @@ function App() {
     alert(`handle test with name = ${name}`)
   }
 
+  // mounting:=  born: phase
   return (
     <div>
+      <div>count = {count}</div>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
       <div className="parent" id="eric" >
         <div className="child"></div>
       </div>
