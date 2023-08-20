@@ -5,6 +5,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import UsersPage from './screens/users.page.tsx';
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/users",
-    element: <div> manage users</div>,
+    element: <UsersPage />,
   },
   {
     path: "/tracks",
