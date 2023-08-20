@@ -10,10 +10,13 @@ interface IProps {
         address: string
     }
     abc?: string; //optional
+    ericFunction: (value: string) => void;
 }
 
 
 const InputTodo = (props: IProps) => {
+
+    const { ericFunction } = props;
 
     const [todo, setTodo] = useState("");
     const [listTodo, setListTodo] = useState(
@@ -21,13 +24,14 @@ const InputTodo = (props: IProps) => {
     )
 
     const handleClick = () => {
-        if (!todo) {
-            alert("empty todo");
-            return;
-        }
-        // alert("click me")
-        setListTodo([...listTodo, todo]) //spread syntax
-        setTodo("")
+        ericFunction(todo)
+        // if (!todo) {
+        //     alert("empty todo");
+        //     return;
+        // }
+        // // alert("click me")
+        // setListTodo([...listTodo, todo]) //spread syntax
+        // setTodo("")
     }
 
     console.log(">>> ")

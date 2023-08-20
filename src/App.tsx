@@ -11,6 +11,11 @@ function App() {
 
   const todos = ["todo 1", "todo 2", "todo 3", "todo 4", "todo 5", "todo 6"]
   // {key: value}
+
+  const handleTest = (name: string) => {
+    alert(`handle test with name = ${name}`)
+  }
+
   return (
     <div>
       <div className="parent" id="eric" >
@@ -20,6 +25,9 @@ function App() {
         name={name}
         age={age}
         hoidanit={info}
+
+        ericFunction={handleTest}
+
       />
 
       {/* <ul>
