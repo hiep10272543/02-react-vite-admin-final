@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import '../../styles/users.css';
-import { Table, Button, Modal } from 'antd';
+import { Table, Button, Modal, Input } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -14,6 +14,14 @@ interface IUsers {
 const UsersTable = () => {
 
     const [listUsers, setListUsers] = useState([]);
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [age, setAge] = useState("");
+    const [gender, setGender] = useState("");
+    const [address, setAddress] = useState("");
+    const [role, setRole] = useState("");
 
     useEffect(() => {
         //update
@@ -67,12 +75,19 @@ const UsersTable = () => {
     };
 
     const handleOk = () => {
-        setIsModalOpen(false);
+        const data = {
+            name, email, password, age, gender, role, address
+        }
+        console.log(">>> check data form: ", data)
+        // setIsModalOpen(false);
     };
 
     const handleCancel = () => {
         setIsModalOpen(false);
     };
+
+
+
     return (
         <div>
             <div style={{
@@ -97,14 +112,64 @@ const UsersTable = () => {
                 rowKey={"_id"}
             />
 
-            <Modal title="Basic Modal"
+            <Modal
+                title="Add new user"
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
+                maskClosable={false}
             >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+                <div>
+                    <label>Name:</label>
+                    <Input
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                    />
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <Input
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
+                </div>
+                <div>
+                    <label>Password:</label>
+                    <Input
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                    />
+                </div>
+                <div>
+                    <label>Age:</label>
+                    <Input
+                        value={age}
+                        onChange={(event) => setAge(event.target.value)}
+                    />
+                </div>
+                <div>
+                    <label>Gender:</label>
+                    <Input
+                        value={gender}
+                        onChange={(event) => setGender(event.target.value)}
+                    />
+                </div>
+
+                <div>
+                    <label>Address:</label>
+                    <Input
+                        value={address}
+                        onChange={(event) => setAddress(event.target.value)}
+                    />
+                </div>
+
+                <div>
+                    <label>Role:</label>
+                    <Input
+                        value={role}
+                        onChange={(event) => setRole(event.target.value)}
+                    />
+                </div>
             </Modal>
         </div>
     )
