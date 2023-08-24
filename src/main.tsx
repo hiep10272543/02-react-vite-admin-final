@@ -13,7 +13,7 @@ import { TeamOutlined, FireOutlined } from
   '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-
+import './App.scss'
 const items: MenuProps['items'] = [
   {
     label: <Link to={'/'}>Home</Link>,
