@@ -23,6 +23,8 @@ const UsersTable = () => {
     const [address, setAddress] = useState("");
     const [role, setRole] = useState("");
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     useEffect(() => {
         //update
         console.log(">>> check useEffect")
@@ -30,7 +32,7 @@ const UsersTable = () => {
     }, [])
 
     const getData = async () => {
-        const access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b2tlbiBsb2dpbiIsImlzcyI6ImZyb20gc2VydmVyIiwiX2lkIjoiNjRkMWM0OTYxNmE3Nzc2YjExOThiZjcyIiwiZW1haWwiOiJob2lkYW5pdEBnbWFpbC5jb20iLCJhZGRyZXNzIjoiVmlldE5hbSIsImlzVmVyaWZ5Ijp0cnVlLCJuYW1lIjoiSSdtIEjhu49pIETDom4gSVQiLCJ0eXBlIjoiU1lTVEVNIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjkyODg2Mjk3LCJleHAiOjE2OTI5NDYyOTd9.R5UboL8Ot9zOcPd_bPK5DbSii3qNCBvTrWWYGn2ZdNU"
+        const access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b2tlbiBsb2dpbiIsImlzcyI6ImZyb20gc2VydmVyIiwiX2lkIjoiNjRkMWM0OTYxNmE3Nzc2YjExOThiZjcyIiwiZW1haWwiOiJob2lkYW5pdEBnbWFpbC5jb20iLCJhZGRyZXNzIjoiVmlldE5hbSIsImlzVmVyaWZ5Ijp0cnVlLCJuYW1lIjoiSSdtIEjhu49pIETDom4gSVQiLCJ0eXBlIjoiU1lTVEVNIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjkzMjMyOTA2LCJleHAiOjE2OTMyOTI5MDZ9.qUR9VY8mvhsoe7LkX39fnGGYHVms2R58-DI4M14X5_0"
 
         const res = await fetch(
             "http://localhost:8000/api/v1/users/all",
@@ -44,8 +46,6 @@ const UsersTable = () => {
         const d = await res.json();
         setListUsers(d.data.result)
     }
-
-    console.log(">>> check render listUsers: ", listUsers)//mounting
 
     const columns: ColumnsType<IUsers> = [
         {
@@ -66,14 +66,6 @@ const UsersTable = () => {
         }
     ]
 
-
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-
     const handleOk = () => {
         const data = {
             name, email, password, age, gender, role, address
@@ -81,12 +73,6 @@ const UsersTable = () => {
         console.log(">>> check data form: ", data)
         // setIsModalOpen(false);
     };
-
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-
-
 
     return (
         <div>
@@ -100,7 +86,7 @@ const UsersTable = () => {
                     <Button
                         icon={<PlusOutlined />}
                         type={"primary"}
-                        onClick={showModal}
+                        onClick={() => setIsModalOpen(true)}
                     >Add new</Button>
                 </div>
 
@@ -116,7 +102,7 @@ const UsersTable = () => {
                 title="Add new user"
                 open={isModalOpen}
                 onOk={handleOk}
-                onCancel={handleCancel}
+                onCancel={() => setIsModalOpen(false)}
                 maskClosable={false}
             >
                 <div>
