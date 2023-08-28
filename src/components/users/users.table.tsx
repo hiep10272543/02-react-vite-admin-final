@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import '../../styles/users.css';
-import { Table, Button, Modal, Input } from 'antd';
+import { Table, Button, Modal, Input, notification } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -25,6 +25,9 @@ const UsersTable = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b2tlbiBsb2dpbiIsImlzcyI6ImZyb20gc2VydmVyIiwiX2lkIjoiNjRkMWM0OTYxNmE3Nzc2YjExOThiZjcyIiwiZW1haWwiOiJob2lkYW5pdEBnbWFpbC5jb20iLCJhZGRyZXNzIjoiVmlldE5hbSIsImlzVmVyaWZ5Ijp0cnVlLCJuYW1lIjoiSSdtIEjhu49pIETDom4gSVQiLCJ0eXBlIjoiU1lTVEVNIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjkzMjMyOTA2LCJleHAiOjE2OTMyOTI5MDZ9.qUR9VY8mvhsoe7LkX39fnGGYHVms2R58-DI4M14X5_0"
+
+
     useEffect(() => {
         //update
         console.log(">>> check useEffect")
@@ -32,7 +35,6 @@ const UsersTable = () => {
     }, [])
 
     const getData = async () => {
-        const access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b2tlbiBsb2dpbiIsImlzcyI6ImZyb20gc2VydmVyIiwiX2lkIjoiNjRkMWM0OTYxNmE3Nzc2YjExOThiZjcyIiwiZW1haWwiOiJob2lkYW5pdEBnbWFpbC5jb20iLCJhZGRyZXNzIjoiVmlldE5hbSIsImlzVmVyaWZ5Ijp0cnVlLCJuYW1lIjoiSSdtIEjhu49pIETDom4gSVQiLCJ0eXBlIjoiU1lTVEVNIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjkzMjMyOTA2LCJleHAiOjE2OTMyOTI5MDZ9.qUR9VY8mvhsoe7LkX39fnGGYHVms2R58-DI4M14X5_0"
 
         const res = await fetch(
             "http://localhost:8000/api/v1/users/all",
@@ -66,13 +68,50 @@ const UsersTable = () => {
         }
     ]
 
-    const handleOk = () => {
+    const handleOk = async () => {
         const data = {
             name, email, password, age, gender, role, address
         }
-        console.log(">>> check data form: ", data)
-        // setIsModalOpen(false);
+
+        const res = await fetch(
+            "http://localhost:8000/api/v1/users",
+            {
+                method: "POST",
+                headers: {
+                    'Authorization': `Bearer ${access_token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ ...data })
+            })
+
+        const d = await res.json();
+        if (d.data) {
+            //success
+            await getData();
+            notification.success({
+                message: "Tạo mới user thành công.",
+            })
+            handleCloseCreateModal();
+        } else {
+            ///
+            notification.error({
+                message: "Có lỗi xảy ra",
+                description: JSON.stringify(d.message)
+            })
+        }
+
     };
+
+    const handleCloseCreateModal = () => {
+        setIsModalOpen(false);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setAge("");
+        setGender("");
+        setAddress("");
+        setRole("");
+    }
 
     return (
         <div>
@@ -102,7 +141,7 @@ const UsersTable = () => {
                 title="Add new user"
                 open={isModalOpen}
                 onOk={handleOk}
-                onCancel={() => setIsModalOpen(false)}
+                onCancel={() => handleCloseCreateModal()}
                 maskClosable={false}
             >
                 <div>
