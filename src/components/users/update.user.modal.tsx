@@ -1,19 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal, Input, notification } from 'antd';
+import { IUsers } from './users.table';
 
 interface IProps {
     access_token: string;
     getData: any;
-    isCreateModalOpen: boolean;
-    setIsCreateModalOpen: (v: boolean) => void;
+    isUpdateModalOpen: boolean;
+    setIsUpdateModalOpen: (v: boolean) => void;
+    dataUpdate: null | IUsers;
+    setDataUpdate: any;
 }
 
 const UpdateUserModal = (props: IProps) => {
 
     const {
         access_token, getData,
-        isCreateModalOpen, setIsCreateModalOpen
+        isUpdateModalOpen, setIsUpdateModalOpen,
+        dataUpdate, setDataUpdate
     } = props;
+
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -22,6 +27,18 @@ const UpdateUserModal = (props: IProps) => {
     const [gender, setGender] = useState("");
     const [address, setAddress] = useState("");
     const [role, setRole] = useState("");
+
+    useEffect(() => {
+        if (dataUpdate) {
+            setName(dataUpdate.name);
+            setEmail(dataUpdate.email);
+            setPassword(dataUpdate.password);
+            setAge(dataUpdate.age);
+            setGender(dataUpdate.gender);
+            setAddress(dataUpdate.address);
+            setRole(dataUpdate.role);
+        }
+    }, [dataUpdate])
 
     const handleOk = async () => {
         const data = {
@@ -58,7 +75,8 @@ const UpdateUserModal = (props: IProps) => {
     };
 
     const handleCloseCreateModal = () => {
-        setIsCreateModalOpen(false);
+        setIsUpdateModalOpen(false);
+        setDataUpdate(null);
         setName("");
         setEmail("");
         setPassword("");
@@ -71,7 +89,7 @@ const UpdateUserModal = (props: IProps) => {
     return (
         <Modal
             title="Update a user"
-            open={isCreateModalOpen}
+            open={isUpdateModalOpen}
             onOk={handleOk}
             onCancel={() => handleCloseCreateModal()}
             maskClosable={false}

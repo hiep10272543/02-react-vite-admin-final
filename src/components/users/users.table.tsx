@@ -6,11 +6,15 @@ import { PlusOutlined } from '@ant-design/icons';
 import CreateUserModal from './create.user.modal';
 import UpdateUserModal from './update.user.modal';
 
-interface IUsers {
+export interface IUsers {
     _id: string;
     email: string;
     name: string;
     role: string;
+    address: string;
+    gender: string;
+    password: string;
+    age: string;
 }
 
 const UsersTable = () => {
@@ -20,6 +24,8 @@ const UsersTable = () => {
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+
+    const [dataUpdate, setDataUpdate] = useState<null | IUsers>(null);
 
 
     const access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b2tlbiBsb2dpbiIsImlzcyI6ImZyb20gc2VydmVyIiwiX2lkIjoiNjRkMWM0OTYxNmE3Nzc2YjExOThiZjcyIiwiZW1haWwiOiJob2lkYW5pdEBnbWFpbC5jb20iLCJhZGRyZXNzIjoiVmlldE5hbSIsImlzVmVyaWZ5Ijp0cnVlLCJuYW1lIjoiSSdtIEjhu49pIETDom4gSVQiLCJ0eXBlIjoiU1lTVEVNIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjkzMjMyOTA2LCJleHAiOjE2OTMyOTI5MDZ9.qUR9VY8mvhsoe7LkX39fnGGYHVms2R58-DI4M14X5_0"
@@ -69,7 +75,7 @@ const UsersTable = () => {
 
                 return (<div>
                     <button onClick={() => {
-                        console.log(">>> check record: ", record)
+                        setDataUpdate(record);
                         setIsUpdateModalOpen(true)
                     }}>Edit</button>
 
@@ -114,8 +120,10 @@ const UsersTable = () => {
             <UpdateUserModal
                 access_token={access_token}
                 getData={getData}
-                isCreateModalOpen={isUpdateModalOpen}
-                setIsCreateModalOpen={setIsUpdateModalOpen}
+                isUpdateModalOpen={isUpdateModalOpen}
+                setIsUpdateModalOpen={setIsUpdateModalOpen}
+                dataUpdate={dataUpdate}
+                setDataUpdate={setDataUpdate}
             />
         </div>
     )
