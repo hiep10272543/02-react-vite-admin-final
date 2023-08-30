@@ -33,7 +33,7 @@ const UsersTable = () => {
 
     const [meta, setMeta] = useState({
         current: 1,
-        pageSize: 2,
+        pageSize: 5,
         pages: 0,
         total: 0
     })
@@ -140,8 +140,29 @@ const UsersTable = () => {
     ]
 
 
-    const handleOnChange = (page: number, pageSize: number) => {
-        console.log(">>> check page, pageSize: ", page, pageSize)
+    const handleOnChange = async (page: number, pageSize: number) => {
+        const res = await fetch(
+            `http://localhost:8000/api/v1/users?current=${page}&pageSize=${pageSize}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${access_token}`,
+                    "Content-Type": "application/json",
+                },
+            })
+
+        const d = await res.json();
+        if (!d.data) {
+            notification.error({
+                message: JSON.stringify(d.message)
+            })
+        }
+        setListUsers(d.data.result)
+        setMeta({
+            current: d.data.meta.current,
+            pageSize: d.data.meta.pageSize,
+            pages: d.data.meta.pages,
+            total: d.data.meta.total
+        })
     }
 
     return (
@@ -171,8 +192,8 @@ const UsersTable = () => {
                     pageSize: meta.pageSize,
                     total: meta.total,
                     showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
-                    onChange: (page: number, pageSize: number) => handleOnChange(page, pageSize)
-
+                    onChange: (page: number, pageSize: number) => handleOnChange(page, pageSize),
+                    showSizeChanger: true
                 }}
             />
 
