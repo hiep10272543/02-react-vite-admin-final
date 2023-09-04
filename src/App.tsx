@@ -1,6 +1,14 @@
 import { useState } from "react";
 import InputTodo from "./todo/input.todo"
 
+const EricComponent = () => {
+  return (
+    <div>
+      i'm eric
+    </div>
+  )
+}
+
 function App() {
 
   const [count, setCount] = useState(10)
@@ -28,6 +36,7 @@ function App() {
       <div className="parent" id="eric" >
         <div className="child"></div>
       </div>
+
       <InputTodo
         name={name}
         age={age}
@@ -37,7 +46,10 @@ function App() {
 
         listTodo={listTodo}
         setListTodo={setListTodo}
-      />
+      >
+        <span>hoi dan it</span>
+        {/* <EricComponent /> */}
+      </InputTodo>
 
       <br />
       <ul>
