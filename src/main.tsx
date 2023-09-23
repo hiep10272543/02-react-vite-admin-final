@@ -9,11 +9,12 @@ import {
 } from "react-router-dom";
 import UsersPage from './screens/users.page.tsx';
 
-import { TeamOutlined, FireOutlined } from
+import { TeamOutlined, FireOutlined, AudioOutlined } from
   '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import './App.scss'
+import TracksPage from './screens/tracks.page.tsx';
 const items: MenuProps['items'] = [
   {
     label: <Link to={'/'}>Home</Link>,
@@ -24,9 +25,12 @@ const items: MenuProps['items'] = [
     label: <Link to='/users'>Manage Users</Link>,
     key: 'users',
     icon: <TeamOutlined />,
-
   },
-
+  {
+    label: <Link to='/tracks'>Manage Tracks</Link>,
+    key: 'tracks',
+    icon: <AudioOutlined />,
+  },
 ];
 
 const Header = () => {
@@ -92,14 +96,14 @@ const router = createBrowserRouter([
         path: "users",
         element: <UsersPage />,
       },
-
+      {
+        path: "tracks",
+        element: <TracksPage />,
+      },
     ]
   },
 
-  {
-    path: "/tracks",
-    element: <div> manage tracks</div>,
-  },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
