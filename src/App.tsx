@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputTodo from "./todo/input.todo"
+import { Button, Result } from "antd";
 
 const EricComponent = () => {
   return (
@@ -31,36 +32,11 @@ function App() {
   // mounting:=  born: phase
   return (
     <div>
-      <div>count = {count}</div>
-      <button onClick={() => setCount(count + 1)}>Increase</button>
-      <div className="parent" id="eric" >
-        <div className="child"></div>
-      </div>
-
-      <InputTodo
-        name={name}
-        age={age}
-        hoidanit={info}
-
-        ericFunction={handleTest}
-
-        listTodo={listTodo}
-        setListTodo={setListTodo}
-      >
-        <span>hoi dan it</span>
-        {/* <EricComponent /> */}
-      </InputTodo>
-
-      <br />
-      <ul>
-        {listTodo.map((item, index) => {
-
-          return (
-            <li key={index}>{item}</li>
-
-          )
-        })}
-      </ul>
+      <Result
+        status="success"
+        title="Admin Dự án Clone SoundCloud"
+        subTitle="Build with React Vite (Typescript) & Ant Design"
+      />
     </div>
   )
 }

@@ -4,8 +4,6 @@ const UsersPage = () => {
     return (
         <div>
             <UsersTable />
-            asdf
-            asfd
         </div>
     )
 }

@@ -116,10 +116,17 @@ const UsersTable = () => {
 
                 return (
                     <div>
-                        <button onClick={() => {
-                            setDataUpdate(record);
-                            setIsUpdateModalOpen(true)
-                        }}>Edit</button>
+
+
+                        <Button
+                            onClick={() => {
+                                setDataUpdate(record);
+                                setIsUpdateModalOpen(true)
+                            }}
+                            type='default'
+                        >
+                            Edit
+                        </Button>
 
                         <Popconfirm
                             title="Delete the user"
